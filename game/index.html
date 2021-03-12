@@ -31,20 +31,37 @@ var hand = new THREE.SphereGeometry(50);
 renderer.render(scene, camera); 
     </script>
 =======
-<body>
+<body></body>
 <script src="/lib/three.js"></script>
 <script>
 var scene = new THREE.Scene();
 var flat = {flatShading: true};
 var light = new THREE.AmbientLight('white', 0.8);
 scene.add(light);
-</body>
+
 // The "camera" is what sees the stuff:
 var aspectRatio = window.innerWidth / window.innerHeight;
 var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
 camera.position.z = 500;
 scene.add(camera);
 
+// CREAMOS EL CUERPO
+var body = new THREE.SphereGeometry(100);
+var cover = new THREE.MeshNormalMaterial(flat);
+var avatar = new THREE.Mesh(body, cover);
+scene.add(avatar);
+
+// CREAMOS LA MANO
+    
+var hand = new THREE.SphereGeometry(50);
+
+var rightHand = new THREE.Mesh(hand, cover);
+rightHand.position.set(-150,0,0);
+secene.add(rightHand);
+    
+var leftHand = new THREE.Mesh(hand, cover);
+leftHand.position.set(150,0,0);
+scene.add(leftHand);
 // The "renderer" draws what the camera sees onto the screen:
 var renderer = new THREE.WebGLRenderer({antialias: true});
 renderer.setSize(window.innerWidth, window.innerHeight);
