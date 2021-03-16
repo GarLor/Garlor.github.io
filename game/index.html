@@ -30,13 +30,43 @@ var hand = new THREE.SphereGeometry(50);
 
 var rightHand = new THREE.Mesh(hand, cover);
 rightHand.position.set(-150,0,0);
-scene.add(rightHand);
+avatar.add(rightHand);
     
 var leftHand = new THREE.Mesh(hand, cover);
 leftHand.position.set(150,0,0);
-scene.add(leftHand);
+avatar.add(leftHand);
+    
+// Los pies
+    
+var foot = new THREE.SphereGeometry(50);
 
+var rightfoot = new THREE.Mesh(foot, cover);
+rightfoot.position.set(-75,-125,0);
+avatar.add(rightfoot);
+
+    var leftfoot = new THREE.Mesh(foot, cover);
+leftfoot.position.set(75,-125,0);
+avatar.add(leftfoot);
+
+
+    
+    
+    
+    
+    
+    
+    
+    
 // Now, show what the camera sees on the screen:
-renderer.render(scene, camera); 
+    
+// animamos la camara
+
+function animate(){
+    renderer.render(scene, camera); 
+requestAnimationFrame(animate);
+    //animacion
+    avatar.rotation.z = avatar.rotation.z +0.05;
+}
+    animate();
+    
     </script>
-=======
