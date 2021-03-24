@@ -30,11 +30,10 @@ var hand = new THREE.SphereGeometry(50);
 
 var rightHand = new THREE.Mesh(hand, cover);
 rightHand.position.set(-150,0,0);
-<<<<<<< HEAD
 avatar.add(rightHand);
-=======
-scene.add(rightHand);
->>>>>>> b844d249edefc5cebd714af4f30812111edffdbb
+
+avatar.add(rightHand);
+
     
 var leftHand = new THREE.Mesh(hand, cover);
 leftHand.position.set(150,0,0);
@@ -53,11 +52,22 @@ leftfoot.position.set(75,-125,0);
 avatar.add(leftfoot);
 
 
+    document.addEventListener('keydown', teclaApretada);
     
+    function teclaApretada(event) {
+        let codigo = event.code;
+        
+        if (codigo == 'KeyS')  {
+        avatar.position.z += 5;
     
+        }
+    if (codigo == 'KeyW')  {
+        avatar.position.z -= 5;
     
+        } 
+    }
     
-    
+
     
     
     
