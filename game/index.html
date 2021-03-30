@@ -22,8 +22,8 @@ document.body.appendChild(renderer.domElement);
     // CREAMOS EL CUERPO
 var body = new THREE.SphereGeometry(100, 100, 100);
 var cover = new THREE.MeshNormalMaterial(flat);
-var color = new THREE.MeshBasicMaterial({color: 'red'})
-var avatar = new THREE.Mesh(body, cover, color);
+var col = new THREE.MeshBasicMaterial({color: 'red'})
+var avatar = new THREE.Mesh(body, cover, col);
 scene.add(avatar);
 
 // CREAMOS LA MANO
@@ -53,9 +53,22 @@ avatar.add(rightfoot);
 leftfoot.position.set(100,-155,0);
 avatar.add(leftfoot);
 
-
-    let isCartWheeling = true;
+    //CREAMOS ARBOLES.
     
+    
+    function MakeTreeAt(x,z) {
+       
+        var tronco = new THREE.CylinderGeometry(50, 50, 200);
+        var textura= new THREE.MeshBasicMaterial({color: "sienna"})
+        var tronco_sienna = THREE.Mesh(tronco, textura);
+        tronco_sienna.position.set(x,-74,z);
+        scene.add(tronco_sienna);
+    }
+    
+   
+    let isCartWheeling = true;
+    let velocidadGiro= 0.05;
+
     document.addEventListener('keydown', teclaApretada);
     
     function teclaApretada(event) {
