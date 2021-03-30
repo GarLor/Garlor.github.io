@@ -18,38 +18,44 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
 // ******** START CODING ON THE NEXT LINE ********
- // CREAMOS EL CUERPO
-var body = new THREE.SphereGeometry(100);
+
+    // CREAMOS EL CUERPO
+var body = new THREE.SphereGeometry(100, 100, 100);
 var cover = new THREE.MeshNormalMaterial(flat);
-var avatar = new THREE.Mesh(body, cover);
+var color = new THREE.MeshBasicMaterial({color: 'red'})
+var avatar = new THREE.Mesh(body, cover, color);
 scene.add(avatar);
 
 // CREAMOS LA MANO
     
-var hand = new THREE.SphereGeometry(50);
+var hand = new THREE.SphereGeometry(50, 100, 3);
 
 var rightHand = new THREE.Mesh(hand, cover);
-rightHand.position.set(-150,0,0);
+rightHand.position.set(-170,0,0);
 avatar.add(rightHand);
+rightHand.rotation.set (1.5,0,0);
 
     
 var leftHand = new THREE.Mesh(hand, cover);
-leftHand.position.set(150,0,0);
+leftHand.position.set(170,0,0);
 avatar.add(leftHand);
+leftHand.rotation.set (1.5,0,0);
     
 // Los pies
     
-var foot = new THREE.SphereGeometry(50);
+var foot = new THREE.SphereGeometry(50, 100, 5);
 
 var rightfoot = new THREE.Mesh(foot, cover);
-rightfoot.position.set(-75,-125,0);
+rightfoot.position.set(-100,-155,0);
 avatar.add(rightfoot);
 
     var leftfoot = new THREE.Mesh(foot, cover);
-leftfoot.position.set(75,-125,0);
+leftfoot.position.set(100,-155,0);
 avatar.add(leftfoot);
 
 
+    let isCartWheeling = true;
+    
     document.addEventListener('keydown', teclaApretada);
     
     function teclaApretada(event) {
@@ -63,6 +69,23 @@ avatar.add(leftfoot);
         avatar.position.z -= 5;
     
         } 
+     if (codigo == 'KeyA')  {
+        avatar.position.x -= 5;
+    
+        } 
+         if (codigo == 'KeyD')  {
+        avatar.position.x += 5;
+    
+        }
+        if (codigo == 'KeyC'){
+            isCartWheeling = !isCartWheeling;
+        }
+        if (codigo =='KeyQ'){
+            avatar.rotation.y = avatar.rotation.y +0.5
+        }
+                if (codigo =='KeyE'){
+            avatar.rotation.y = avatar.rotation.y -0.5
+        }
     }
     
 
@@ -74,10 +97,14 @@ avatar.add(leftfoot);
 // animamos la camara
 
 function animate(){
+    requestAnimationFrame(animate);
+    if (isCartWheeling){
+        avatar.rotation.z = avatar.rotation.z + 0.05
+    }
     renderer.render(scene, camera); 
-requestAnimationFrame(animate);
+
     //animacion
-    avatar.rotation.z = avatar.rotation.z +0.05;
+    avatar.rotation.z = avatar.rotation.z -0.05;
 }
     animate();
     
