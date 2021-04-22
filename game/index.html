@@ -11,7 +11,6 @@ var aspectRatio = window.innerWidth / window.innerHeight;
 var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
 camera.position.z = 5000;
 camera.position.y = 500;
-    
 scene.add(camera);
 
 // The "renderer" draws what the camera sees onto the screen:
@@ -66,13 +65,13 @@ avatar.add(leftfoot);
         scene.add(tronco_sienna);
     }
     
-    function crearCampoAleatorio(numArboles, ancho, largo){
-    for (var i =0; i< numArboles;i++) {
-        var x= Math.random(5)*ancho-ancho/2;
-        var z= Math.random()*largo-largo/2;
-        crearArbol(x,z);
-    }
-    }
+  //  function crearCampoAleatorio(numArboles, ancho, largo){
+   // for (var i =0; i< numArboles;i++) {
+     //  var x= Math.random(5)*ancho-ancho/2;
+       // var z= Math.random()*largo-largo/2;
+      //  crearArbol(x,z);
+   // }
+   // }
     function crearCampoOrdenado() {
     var minimo_x = -5000;
         var maximo_x = 5000;
@@ -82,58 +81,53 @@ avatar.add(leftfoot);
         }}
         crearCampoOrdenado (-1000,-1000,5000,500)
     
-    crearCampoAleatorio(100, 5000, 10000)
+    //crearCampoAleatorio(100, 5000, 10000)
     
     let isCartWheeling = true;
     let velocidadGiro= 0.05;
 
-    document.addEventListener('keydown', teclaApretada);
+   // document.addEventListener('keydown', teclaApretada);
     
-    function teclaApretada(event) {
-        let codigo = event.code;
+    //function teclaApretada(event) {
+       // let codigo =event.code;
         
-        if (codigo == 'KeyS')  {
-        avatar.position.z += 5;
+       // if (codigo == 'KeyS')  {
+    //    avatar.position.z += 5;
     
-        }
-    if (codigo == 'KeyW')  {
-        avatar.position.z -= 5;
+      //  }
+       // if (codigo == 'KeyW')  {
+      //  avatar.position.z -= 5;
+    //
+     //   } 
+      //  if (codigo == 'KeyA')  {
+      //  avatar.position.x -= 5;
+    //
+       // } 
+       //  if (codigo == 'KeyD')  {
+       // avatar.position.x += 5;
     
-        } 
-     if (codigo == 'KeyA')  {
-        avatar.position.x -= 5;
+       //}
+      //  if (codigo == 'KeyC'){
+           // isCartWheeling = !isCartWheeling;
+        //}
+   // }
     
-        } 
-         if (codigo == 'KeyD')  {
-        avatar.position.x += 5;
-    
-        }
-        if (codigo == 'KeyC'){
-            isCartWheeling = !isCartWheeling;
-        }
-        if (codigo =='KeyQ'){
-            avatar.rotation.y = avatar.rotation.y +0.5
-        }
-                if (codigo =='KeyE'){
-            avatar.rotation.y = avatar.rotation.y -0.5
-        }
-    }
-    
-var marker= new THREE.Object3D();
-    scene.add(marker);
-    marker.add(avatar);
-    marker.add(camera);
+
+   var marcador= new THREE.Object3D();
+   scene.add(marcador);
+    marcador.add(avatar);
+    marcador.add(camera);
     document.addEventListener('keydown', teclaApretada);
     function teclaApretada(event){
        var code= event.code;
-        if(code=='ArrowLeft')maker.position.x= marker.position.x -5;
-        if(code=='ArrowRight')maker.position.x= marker.position.x +5;
-        if(code=='ArrowUp')maker.position.z= marker.position.z -5;
-        if(code=='ArrowDown')maker.position.z= marker.position.z +5;
-   
+       if(code=='KeyA')avatar.rotation.y= avatar.rotation.y -5;
+        if(code=='KeyD')avatar.rotation.y= avatar.rotation.y +5;
+        if(code=='KeyW')avatar.position.z= avatar.position.z -5;
+        if(code=='KeyS')avatar.position.z= avatar.position.z +5;
         if(code=='KeyC')isCartWheeling=!isCartWheeling;
         if (code=='KeyF')isFliping=!isFlipping;
     }
+    avatar.add(camera);
     
 // Now, show what the camera sees on the screen:
     
