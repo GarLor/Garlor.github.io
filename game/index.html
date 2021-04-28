@@ -53,6 +53,9 @@ avatar.add(rightfoot);
     var leftfoot = new THREE.Mesh(foot, cover);
 leftfoot.position.set(100,-155,0);
 avatar.add(leftfoot);
+    
+    
+
 
     //CREAMOS ARBOLES.
     
@@ -120,14 +123,23 @@ avatar.add(leftfoot);
     document.addEventListener('keydown', teclaApretada);
     function teclaApretada(event){
        var code= event.code;
-       if(code=='KeyA')avatar.rotation.y= avatar.rotation.y -5;
-        if(code=='KeyD')avatar.rotation.y= avatar.rotation.y +5;
-        if(code=='KeyW')avatar.position.z= avatar.position.z -5;
-        if(code=='KeyS')avatar.position.z= avatar.position.z +5;
+       if(code=='KeyA')marcador.rotation.y= marcador.rotation.y -0.01;
+        if(code=='KeyD')avanzar(marcador.rotation.y)=marcador.rotation.y +0.01;
+        if(code=='KeyW')marcador.position.z=marcador.position.z -5;
+        if(code=='KeyS')marcador.position.z=marcador.position.z +5;
         if(code=='KeyC')isCartWheeling=!isCartWheeling;
         if (code=='KeyF')isFliping=!isFlipping;
     }
     avatar.add(camera);
+    
+    function avanzar (direccion){
+        direccion+=Math.PI/2;
+        console.log("radianes:"+direccion);
+        console.log("grados:"+ direccion*180/Math.PI)
+        console.log("direccion:" + direccion);
+        console.log()    
+    
+    }
     
 // Now, show what the camera sees on the screen:
     
