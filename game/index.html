@@ -9,7 +9,7 @@ scene.add(light);
 // The "camera" is what sees the stuff:
 var aspectRatio = window.innerWidth / window.innerHeight;
 var camera = new THREE.PerspectiveCamera(75, aspectRatio, 1, 10000);
-camera.position.z = 5000;
+camera.position.z = 1000;
 camera.position.y = 500;
 scene.add(camera);
 
@@ -66,6 +66,12 @@ avatar.add(leftfoot);
         var tronco_sienna = new THREE.Mesh(tronco, textura);
         tronco_sienna.position.set(x,-74,z);
         scene.add(tronco_sienna);
+        var copa= new THREE.Mesh (
+        new THREE.SphereGeometry(150),
+        new THREE.MeshBasicMaterial({color:'forestgreen'})
+        );
+        copa.position.y=175;
+        tronco_sienna.add(copa);
     }
     
   //  function crearCampoAleatorio(numArboles, ancho, largo){
@@ -80,8 +86,12 @@ avatar.add(leftfoot);
         var maximo_x = 5000;
         var paso_x = 1000;
         for(var x=minimo_x;x<maximo_x;x=x+paso_x){
-            crearArbol(x,0);
-        }}
+            crearArbol(x,0,);
+        }
+    
+        
+    
+    }
         crearCampoOrdenado (-1000,-1000,5000,500)
     
     //crearCampoAleatorio(100, 5000, 10000)
@@ -124,9 +134,9 @@ avatar.add(leftfoot);
     function teclaApretada(event){
        var code= event.code;
        if(code=='KeyA')marcador.rotation.y= marcador.rotation.y -0.01;
-        if(code=='KeyD')avanzar(marcador.rotation.y)=marcador.rotation.y +0.01;
-        if(code=='KeyW')marcador.position.z=marcador.position.z -5;
-        if(code=='KeyS')marcador.position.z=marcador.position.z +5;
+        if(code=='KeyD')marcador.rotation.y=marcador.rotation.y +0.01;
+        if(code=='KeyW') avanzar(marcador.position.z);
+        if(code=='KeyS') avanzar(marcador.position.z);
         if(code=='KeyC')isCartWheeling=!isCartWheeling;
         if (code=='KeyF')isFliping=!isFlipping;
     }
@@ -138,7 +148,8 @@ avatar.add(leftfoot);
         console.log("grados:"+ direccion*180/Math.PI)
         console.log("direccion:" + direccion);
         console.log()    
-    
+        marcador.position.z-=20*Math.sin(direccion);
+        marcador.position.x+=20*Math.cos(direccion);
     }
     
 // Now, show what the camera sees on the screen:
