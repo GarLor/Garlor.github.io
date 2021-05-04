@@ -81,18 +81,21 @@ avatar.add(leftfoot);
       //  crearArbol(x,z);
    // }
    // }
-    function crearCampoOrdenado() {
-    var minimo_x = -5000;
-        var maximo_x = 5000;
-        var paso_x = 1000;
+    function crearFila(z, minimo_x, maximo_x, paso_x) {
         for(var x=minimo_x;x<maximo_x;x=x+paso_x){
             crearArbol(x,0,);
         }
-    
+          }
+    function crearCampoArboles(minimo_x, minimo_z, maximo_x, maximo_z, paso){
+        
+        for (var z=minimo_z;z<maximo_z;z=z+paso){
+            crearFila(z, minimo_z, maximo_x,paso);
+        }
+    }
         
     
-    }
-        crearCampoOrdenado (-1000,-1000,5000,500)
+  
+ crearCampoArboles (-5000,-5000,5000,5000,1000);
     
     //crearCampoAleatorio(100, 5000, 10000)
     
@@ -145,7 +148,7 @@ avatar.add(leftfoot);
     function avanzar (direccion){
         direccion+=Math.PI/2;
         console.log("radianes:"+direccion);
-        console.log("grados:"+ direccion*180/Math.PI)
+        console.log("grados:"+ direccion*180/Math.PI)f
         console.log("direccion:" + direccion);
         console.log()    
         marcador.position.z-=20*Math.sin(direccion);
