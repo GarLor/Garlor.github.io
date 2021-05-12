@@ -20,6 +20,7 @@ document.body.appendChild(renderer.domElement);
 
 // ******** START CODING ON THE NEXT LINE ********
 
+listaColision = [];
     // CREAMOS EL CUERPO
 var body = new THREE.SphereGeometry(100, 100, 100);
 var cover = new THREE.MeshNormalMaterial(flat);
@@ -72,18 +73,32 @@ avatar.add(leftfoot);
         );
         copa.position.y=175;
         tronco_sienna.add(copa);
+      
+        // Añadimos colision
+        
+        var circulo = new THREE.CircleGeometry(300);
+        var invisible = new THREE.MeshNormalMaterial();
+        var limite= new THREE.Mesh(circulo, invisible);
+        limite.position.y =-100;
+        limite.rotation.x =-Math.PI/2;
+        tronco_sienna.add(limite);
+        listaColision.push(limite);
+    }
+    function colision(){
+        
+        var vector =new THREE.Vector3(0,-1,0);
+        var ray= new THREE.Raycaster(marker.position, vector);
+        var intersect= ray.intersectObjects(notAllowed);
+        if (intersect.length>0)return true;
+        return false;
     }
     
-  //  function crearCampoAleatorio(numArboles, ancho, largo){
-   // for (var i =0; i< numArboles;i++) {
-     //  var x= Math.random(5)*ancho-ancho/2;
-       // var z= Math.random()*largo-largo/2;
-      //  crearArbol(x,z);
-   // }
-   // }
+    
+    
+  
     function crearFila(z, minimo_x, maximo_x, paso_x) {
         for(var x=minimo_x;x<maximo_x;x=x+paso_x){
-            crearArbol(x,0,);
+            crearArbol(x,z);
         }
           }
     function crearCampoArboles(minimo_x, minimo_z, maximo_x, maximo_z, paso){
@@ -95,7 +110,7 @@ avatar.add(leftfoot);
         
     
   
- crearCampoArboles (-5000,-5000,5000,5000,1000);
+ crearCampoArboles(-5000,-5000,5000,5000,1000);
     
     //crearCampoAleatorio(100, 5000, 10000)
     
@@ -136,10 +151,10 @@ avatar.add(leftfoot);
     document.addEventListener('keydown', teclaApretada);
     function teclaApretada(event){
        var code= event.code;
-       if(code=='KeyA')marcador.rotation.y= marcador.rotation.y -0.01;
-        if(code=='KeyD')marcador.rotation.y=marcador.rotation.y +0.01;
-        if(code=='KeyW') avanzar(marcador.position.z);
-        if(code=='KeyS') avanzar(marcador.position.z);
+       if(code=='KeyA') marcador.rotation.y= marcador.rotation.y +0.1;
+        if(code=='KeyD')marcador.rotation.y=marcador.rotation.y -0.1;
+        if(code=='KeyW') avanzar(marcador.rotation.y);
+        if(code=='KeyS') avanzar(marcador.rotation.z+Math.PI);
         if(code=='KeyC')isCartWheeling=!isCartWheeling;
         if (code=='KeyF')isFliping=!isFlipping;
     }
@@ -148,13 +163,20 @@ avatar.add(leftfoot);
     function avanzar (direccion){
         direccion+=Math.PI/2;
         console.log("radianes:"+direccion);
-        console.log("grados:"+ direccion*180/Math.PI)f
-        console.log("direccion:" + direccion);
-        console.log()    
+        console.log("grados:"+ direccion*180/Math.PI);
+        console.log("direccion:" + direccion);    
         marcador.position.z-=20*Math.sin(direccion);
         marcador.position.x+=20*Math.cos(direccion);
+        
+        if(colision()){
+            
+        marcador.position.z -= -20*Math.sin(direccion);
+        marcador.position.x += -20*Math.cos(direccion);
+        }
     }
+  
     
+
 // Now, show what the camera sees on the screen:
     
 // animamos la camara
